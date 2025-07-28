@@ -1,0 +1,33 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Compile Plugin
+      run: |
+        mkdir -p compiled
+        javac -d compiled ffa/src/me/danger/ffa/Main.java
+        echo "Main-Class: me.danger.ffa.Main" > manifest.txt
+        jar cfm DangerFFA.jar manifest.txt -C compiled .
+    
+    - name: Upload Jar
+      uses: actions/upload-artifact@v3
+      with:
+        name: DangerFFA
+        path: DangerFFA.jar
