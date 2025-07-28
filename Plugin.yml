@@ -1,0 +1,11 @@
+name: DangerFFA
+main: me.danger.ffa.Main
+version: 1.0
+api-version: 1.16
+description: Custom FFA Plugin by DangerGod006
+author: DangerGod006
+commands:
+  ffa:
+    description: Main FFA command
+    usage: /ffa
+    aliases: [freeforall]
